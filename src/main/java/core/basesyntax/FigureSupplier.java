@@ -5,35 +5,50 @@ import java.util.Random;
 public class FigureSupplier {
     private static final int MAX_NUMBERS = 5;
     private static final int COEFICIENT_RANDOM = 10;
+    private String color = new ColorSupplier().getRandomColor();
+
+    private Square getSquare() {
+        int side = new Random().nextInt(COEFICIENT_RANDOM);
+        return new Square(color, side);
+    }
+
+    private Rectangle getRectangle() {
+        int sideA = new Random().nextInt(COEFICIENT_RANDOM);
+        int sideB = new Random().nextInt(COEFICIENT_RANDOM);
+        return new Rectangle(color, sideA, sideB);
+    }
+
+    private RightTriangle getRightTriangle() {
+        int firstLeg = new Random().nextInt(COEFICIENT_RANDOM);
+        int secondLeg = new Random().nextInt(COEFICIENT_RANDOM);
+        return new RightTriangle(color,firstLeg, secondLeg);
+    }
+
+    private Circle getCircle() {
+        int radius = new Random().nextInt(COEFICIENT_RANDOM);
+        return new Circle(color, radius);
+    }
+
+    private IsoscelesTrapezoid getIsoscelesTrapezoid() {
+        int sideA = new Random().nextInt(COEFICIENT_RANDOM);
+        int sideB = new Random().nextInt(COEFICIENT_RANDOM);
+        int height = new Random().nextInt(COEFICIENT_RANDOM);
+        return new IsoscelesTrapezoid(color, sideA, sideB, height);
+    }
 
     public static Figure getRandomFigure() {
-        Figure figure;
+        FigureSupplier figure = new FigureSupplier();
         switch (new Random().nextInt(MAX_NUMBERS)) {
             case 0:
-                figure = new Square(new ColorSupplier().getRandomColor(),
-                                    new Random().nextInt(COEFICIENT_RANDOM));
-                break;
+                return figure.getSquare();
             case 1:
-                figure = new Rectangle(new ColorSupplier().getRandomColor(),
-                                       new Random().nextInt(COEFICIENT_RANDOM),
-                                       new Random().nextInt(COEFICIENT_RANDOM));
-                break;
+                return figure.getRectangle();
             case 2:
-                figure = new RightTriangle(new ColorSupplier().getRandomColor(),
-                                           new Random().nextInt(COEFICIENT_RANDOM),
-                                           new Random().nextInt(COEFICIENT_RANDOM));
-                break;
+                return figure.getRightTriangle();
             case 3:
-                figure = new Circle(new ColorSupplier().getRandomColor(),
-                                    new Random().nextInt(COEFICIENT_RANDOM));
-                break;
+                return figure.getCircle();
             default:
-                figure = new IsoscelesTrapezoid(new ColorSupplier().getRandomColor(),
-                                                new Random().nextInt(COEFICIENT_RANDOM),
-                                                new Random().nextInt(COEFICIENT_RANDOM),
-                                                new Random().nextInt(COEFICIENT_RANDOM));
-                break;
+                return figure.getIsoscelesTrapezoid();
         }
-        return figure;
     }
 }
